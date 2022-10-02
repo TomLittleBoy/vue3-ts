@@ -6,8 +6,8 @@ s
 
 vue3-ts-cms
 
-#### Software Architecture
 
+#### Software Architecture
 Software architecture description
 
 #### Installation

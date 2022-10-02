@@ -1,31 +1,26 @@
 <template>
   <div>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <h2>sdsdd</h2>
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+    <router-link to="/login">登录</router-link>
+    <router-link to="/main">首页</router-link>
+    <router-view></router-view>
+    {{ $store.state.name }}
+
+    <el-button type="">3434</el-button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
 
-import HelloWorld from "./components/HelloWorld.vue"
-
+// import login from "./view/login/login.vue"
+// import main from "./view/main/main.vue"
 export default defineComponent({
   name: "App",
   components: {
-    HelloWorld
+    // login,
+    // main
   }
 })
 </script>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="less"></style>

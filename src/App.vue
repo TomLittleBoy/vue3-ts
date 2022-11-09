@@ -1,17 +1,16 @@
 <template>
-  <div>
-    <router-link to="/login">登录</router-link>
-    <router-link to="/main">首页</router-link>
-    <router-view></router-view>
-    {{ $store.state.name }}
-
-    <el-button type="">3434</el-button>
+  <div class="app">
+    <el-config-provider :locale="locale">
+      <router-view></router-view>
+    </el-config-provider>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue"
-
+//国际化
+import { ElConfigProvider } from "element-plus"
+import zhCn from "element-plus/dist/locale/zh-cn.mjs"
 // import login from "./view/login/login.vue"
 // import main from "./view/main/main.vue"
 export default defineComponent({
@@ -19,8 +18,18 @@ export default defineComponent({
   components: {
     // login,
     // main
+    ElConfigProvider
+  },
+  setup(props) {
+    return {
+      locale: zhCn
+    }
   }
 })
 </script>
 
-<style lang="less"></style>
+<style lang="less">
+.app {
+  height: 100%;
+}
+</style>

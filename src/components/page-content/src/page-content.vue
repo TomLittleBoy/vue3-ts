@@ -9,7 +9,9 @@
       >
         <!-- header中插槽 -->
         <template #headerHandler>
-          <el-button type="primary" size="medium">新建用户</el-button>
+          <el-button v-if="isCreate" type="primary" size="medium"
+            >新建用户</el-button
+          >
         </template>
         <!-- 列中插槽 -->
         <template #status="scope">
@@ -29,9 +31,13 @@
         </template>
         <template #handler>
           <div class="handle-btns">
-            <el-button size="mini" :icon="Edit" type="text"> 编辑 </el-button>
+            <el-button size="mini" :icon="Edit" type="text" v-if="isUpdate">
+              编辑
+            </el-button>
 
-            <el-button :icon="Delete" size="mini" type="text">删除</el-button>
+            <el-button :icon="Delete" size="mini" type="text" v-if="isDelete"
+              >删除</el-button
+            >
           </div>
         </template>
 
@@ -55,6 +61,7 @@ import Ttbale from "@/base-ui/table"
 import { useStore } from "@/store"
 import { defineComponent, computed, ref, watch } from "vue"
 import { Delete, Edit } from "@element-plus/icons-vue"
+import { usePermission } from "@/hooks/use-permission"
 export default defineComponent({
   components: {
     Ttbale
@@ -69,6 +76,12 @@ export default defineComponent({
   setup(props) {
     const store = useStore()
 
+    // 获取操作的权限
+    const isCreate = usePermission(props.pageName, "create")
+    const isUpdate = usePermission(props.pageName, "update")
+    const isDelete = usePermission(props.pageName, "delete")
+    const isQuery = usePermission(props.pageName, "query")
+
     //双向绑定pageInfo
     const pageInfo = ref({ currentPage: 0, pageSize: 10 })
 
@@ -77,6 +90,7 @@ export default defineComponent({
 
     // 发送请求 获取数据
     const getPageData = (queryInfo: any = {}) => {
+      if (!isQuery) return
       store.dispatch("system/getPageListAction", {
         // pageUrl: "users/list",
         pageName: props.pageName,
@@ -118,7 +132,11 @@ export default defineComponent({
       getPageData,
       dataCount,
       pageInfo,
-      otherPropSlots
+      otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete,
+      isQuery
     }
   }
 })

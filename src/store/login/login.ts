@@ -5,7 +5,7 @@ import {
   requestUserInfoById,
   requestUserMenusByRoleId
 } from "@/service/login/login"
-import { mapMenusToRoutes } from "@/utils/map-menus"
+import { mapMenusToRoutes, mapMenusToPermissions } from "@/utils/map-menus"
 import { IAccount } from "@/service/login/types"
 import localCache from "@/utils/cache"
 import router from "@/router"
@@ -16,7 +16,8 @@ const loginModule: Module<ILoginState, IRootState> = {
     return {
       token: "",
       userInfo: {},
-      userMenus: []
+      userMenus: [],
+      permissions: []
     }
   },
   getters: {},
@@ -36,6 +37,11 @@ const loginModule: Module<ILoginState, IRootState> = {
       routes.forEach((route) => {
         router.addRoute("main", route)
       })
+
+      // 获取用户按钮权限
+      const permissions = mapMenusToPermissions(userMenus)
+      console.log("permissions", permissions)
+      state.permissions = permissions
     }
   },
   // 做异步操作

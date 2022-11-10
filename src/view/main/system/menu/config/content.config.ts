@@ -20,6 +20,14 @@ export const contentTableConfig = {
     },
     { label: "操作", minWidth: "120", slotName: "handler" }
   ],
+  childrenProps: {
+    rowKey: "id",
+    treeProps: {
+      children: "children",
+      hasChildren: true
+    }
+  },
   showIndexColumn: false,
-  showSelectColumn: false
+  showSelectColumn: false,
+  showFooter: false
 }

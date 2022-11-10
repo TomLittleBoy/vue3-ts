@@ -8,7 +8,13 @@
         </div>
       </slot>
     </div>
-    <el-table :data="listData" border style="width: 100%">
+    <el-table
+      :data="listData"
+      border
+      style="width: 100%"
+      v-bind="childrenProps"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column
         v-if="showSelectColumn"
         type="selection"
@@ -37,7 +43,7 @@
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="showFooter">
       <slot name="footer">
         <el-pagination
           v-model:currentPage="page.currentPage"
@@ -85,9 +91,22 @@ export default defineComponent({
     page: {
       type: Object,
       default: () => ({ currentPage: 0, pageSize: 10 })
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({
+        treeProps: {
+          children: "children",
+          hasChildren: true
+        }
+      })
+    },
+    showFooter: {
+      type: Boolean,
+      default: true
     }
   },
-  emits: ["update:page"],
+  emits: ["update:page", "selectionChange"],
   setup(props, { emit }) {
     const handleCurrentChange = (currentPage: number) => {
       emit("update:page", { ...props.page, currentPage })
@@ -95,7 +114,12 @@ export default defineComponent({
     const handleSizeChange = (pageSize: number) => {
       emit("update:page", { ...props.page, pageSize })
     }
-    return { handleCurrentChange, handleSizeChange }
+
+    const handleSelectionChange = (value: any) => {
+      emit("selectionChange", value)
+    }
+
+    return { handleCurrentChange, handleSizeChange, handleSelectionChange }
   }
 })
 </script>

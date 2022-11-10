@@ -20,7 +20,7 @@ export default defineComponent({
     // main
     ElConfigProvider
   },
-  setup(props) {
+  setup() {
     return {
       locale: zhCn
     }

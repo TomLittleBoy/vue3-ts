@@ -3,9 +3,7 @@ const path = require("path")
 // const fs = require("fs")
 const AutoImport = require("unplugin-auto-import/webpack")
 const Components = require("unplugin-vue-components/webpack")
-const {
-  ElementPlusResolver
-} = require("unplugin-vue-components/resolvers")
+const { ElementPlusResolver } = require("unplugin-vue-components/resolvers")
 
 // 全局 scss 资源
 // const scssResources = []

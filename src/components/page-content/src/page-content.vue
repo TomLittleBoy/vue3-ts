@@ -29,13 +29,18 @@
         <template #updateAt="scope">
           <strong>{{ $filters.formatTime(scope.row.updateAt) }}</strong>
         </template>
-        <template #handler>
+        <template #handler="scope">
           <div class="handle-btns">
             <el-button size="mini" :icon="Edit" type="text" v-if="isUpdate">
               编辑
             </el-button>
 
-            <el-button :icon="Delete" size="mini" type="text" v-if="isDelete"
+            <el-button
+              :icon="Delete"
+              size="mini"
+              type="text"
+              v-if="isDelete"
+              @click="handleDeleteClick(scope.row)"
               >删除</el-button
             >
           </div>
@@ -83,10 +88,19 @@ export default defineComponent({
     const isQuery = usePermission(props.pageName, "query")
 
     //双向绑定pageInfo
-    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+    const pageInfo = ref({ currentPage: 1, pageSize: 10 })
 
     // 监听数数据变化
     watch(pageInfo, () => getPageData())
+
+    // 删除操作
+    const handleDeleteClick = (item: any) => {
+      console.log("item", item)
+      store.dispatch("system/deletePageDataAction", {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
 
     // 发送请求 获取数据
     const getPageData = (queryInfo: any = {}) => {
@@ -95,7 +109,7 @@ export default defineComponent({
         // pageUrl: "users/list",
         pageName: props.pageName,
         queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
           size: pageInfo.value.pageSize,
           ...queryInfo
         }
@@ -136,7 +150,8 @@ export default defineComponent({
       isCreate,
       isUpdate,
       isDelete,
-      isQuery
+      isQuery,
+      handleDeleteClick
     }
   }
 })

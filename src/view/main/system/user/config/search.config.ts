@@ -2,11 +2,11 @@ import { IForm } from "@/base-ui/form"
 
 export const searchFormConfig: IForm = {
   labelWidth: "120px",
-  itemLayout: {
+  itemStyle: {
     padding: "10px 40px"
   },
   colLayout: {
-    span: ""
+    span: 8
   },
   formItems: [
     {
@@ -38,6 +38,16 @@ export const searchFormConfig: IForm = {
       options: [
         { title: "篮球", value: "basketball" },
         { title: "足球", value: "football" }
+      ]
+    },
+    {
+      field: "enable",
+      type: "select",
+      label: "用户状态",
+      placeholder: "请选择用户状态",
+      options: [
+        { title: "启用", value: 1 },
+        { title: "禁用", value: 0 }
       ]
     },
     {

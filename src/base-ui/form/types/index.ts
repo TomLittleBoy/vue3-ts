@@ -9,6 +9,7 @@ export interface IFormItem {
   // 针对select
   options?: any
   field?: string
+  isHidden?: boolean
 }
 
 export interface IForm {
@@ -16,4 +17,5 @@ export interface IForm {
   labelWidth?: string
   colLayout?: any
   itemLayout?: any
+  itemStyle?: any
 }

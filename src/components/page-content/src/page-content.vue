@@ -9,7 +9,11 @@
       >
         <!-- header中插槽 -->
         <template #headerHandler>
-          <el-button v-if="isCreate" type="primary" size="medium"
+          <el-button
+            v-if="isCreate"
+            type="primary"
+            size="medium"
+            @click="handleNewClick"
             >新建用户</el-button
           >
         </template>
@@ -31,7 +35,13 @@
         </template>
         <template #handler="scope">
           <div class="handle-btns">
-            <el-button size="mini" :icon="Edit" type="text" v-if="isUpdate">
+            <el-button
+              size="mini"
+              :icon="Edit"
+              type="text"
+              v-if="isUpdate"
+              @click="handleEditClick(scope.row)"
+            >
               编辑
             </el-button>
 
@@ -78,7 +88,8 @@ export default defineComponent({
     },
     pageName: { type: String, required: true }
   },
-  setup(props) {
+  emits: ["newBtnClick", "editBtnClick"],
+  setup(props, { emit }) {
     const store = useStore()
 
     // 获取操作的权限
@@ -92,15 +103,6 @@ export default defineComponent({
 
     // 监听数数据变化
     watch(pageInfo, () => getPageData())
-
-    // 删除操作
-    const handleDeleteClick = (item: any) => {
-      console.log("item", item)
-      store.dispatch("system/deletePageDataAction", {
-        pageName: props.pageName,
-        id: item.id
-      })
-    }
 
     // 发送请求 获取数据
     const getPageData = (queryInfo: any = {}) => {
@@ -138,6 +140,23 @@ export default defineComponent({
         return true
       }
     )
+    // 删除操作
+    const handleDeleteClick = (item: any) => {
+      console.log("item", item)
+      store.dispatch("system/deletePageDataAction", {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
+
+    // 编辑/新建操作
+    const handleNewClick = () => {
+      emit("newBtnClick")
+    }
+
+    const handleEditClick = (item: any) => {
+      emit("editBtnClick", item)
+    }
 
     return {
       Delete,
@@ -151,7 +170,9 @@ export default defineComponent({
       isUpdate,
       isDelete,
       isQuery,
-      handleDeleteClick
+      handleDeleteClick,
+      handleNewClick,
+      handleEditClick
     }
   }
 })

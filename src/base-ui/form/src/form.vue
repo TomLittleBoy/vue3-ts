@@ -11,11 +11,13 @@
               :label="item.label"
               :rules="item.rules"
               :style="itemStyle"
+              v-if="!item.isHidden"
             >
               <template
                 v-if="item.type === 'input' || item.type === 'password'"
               >
                 <el-input
+                  size="large"
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
                   :show-password="item.type === 'password'"
@@ -24,11 +26,14 @@
               </template>
               <template v-else-if="item.type === 'select'">
                 <el-select
+                  size="large"
                   :placeholder="item.placeholder"
                   v-bind="item.otherOptions"
+                  style="width: 100%"
                   v-model="formData[`${item.field}`]"
                 >
                   <el-option
+                    size="large"
                     v-for="option in item.options"
                     :key="option.value"
                     :value="option.value"
@@ -38,6 +43,7 @@
               </template>
               <template v-else-if="item.type === 'datepicker'">
                 <el-date-picker
+                  size="large"
                   style="width: 100%"
                   v-bind="item.otherOptions"
                   v-model="formData[`${item.field}`]"

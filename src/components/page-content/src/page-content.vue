@@ -142,7 +142,6 @@ export default defineComponent({
     )
     // 删除操作
     const handleDeleteClick = (item: any) => {
-      console.log("item", item)
       store.dispatch("system/deletePageDataAction", {
         pageName: props.pageName,
         id: item.id

@@ -49,7 +49,8 @@ const store = createStore<IRootState>({
 
 export function setupStore() {
   store.dispatch("login/loadLocalLogin")
-  store.dispatch("getInitialDataAction")
+  //可能导致没有token 存放数据登录后存在问题
+  // store.dispatch("getInitialDataAction")
 }
 
 export function useStore(): Store<IStoreType> {

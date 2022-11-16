@@ -26,8 +26,8 @@ export default defineComponent({
     const ruleFormRef = ref<FormInstance>()
     const store = useStore()
     const account = reactive({
-      name: "",
-      password: ""
+      name: localCache.getCache("name") ?? "",
+      password: localCache.getCache("password") ?? ""
     })
 
     const rules = reactive<FormRules>({
@@ -54,8 +54,6 @@ export default defineComponent({
     })
 
     const loginAction = (isKeepPassword: boolean) => {
-      console.log("进来了")
-
       // 校验
       ruleFormRef.value?.validate((valid) => {
         if (valid) {

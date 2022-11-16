@@ -56,6 +56,7 @@ export default defineComponent({
       const passwordItem = modalConfig.formItems.find(
         (item) => item.field === "password"
       )
+
       passwordItem!.isHidden = false
     }
     const editCallback = () => {
@@ -67,9 +68,9 @@ export default defineComponent({
     //动态添加部门和角色列表
     const store = useStore()
     const modalConfigRef = computed(() => {
-      const departmentItem = modalConfig.formItems.find((item) => {
-        return item.field === "departmentId"
-      })
+      const departmentItem = modalConfig.formItems.find(
+        (item) => item.field === "departmentId"
+      )
       departmentItem!.options = store.state.entireDepartment.map((item) => {
         return { title: item.name, value: item.id }
       })

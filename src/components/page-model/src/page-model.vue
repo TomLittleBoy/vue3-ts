@@ -60,6 +60,7 @@ export default defineComponent({
 
     const store = useStore()
     const handleConfirmClick = () => {
+      debugger
       dialogVisible.value = false
       if (Object.keys(props.defaultInfo).length) {
         // 编辑

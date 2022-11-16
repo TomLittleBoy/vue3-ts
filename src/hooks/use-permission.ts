@@ -5,8 +5,6 @@ export function usePermission(pageName: string, hanldeName: string) {
   const permissions = store.state.login.permissions
 
   const verifyPermission = `system:${pageName}:${hanldeName}`
-  console.log("verifyPermission", verifyPermission)
-
   // 返回boolean值
 
   // !!将值转换为boolean

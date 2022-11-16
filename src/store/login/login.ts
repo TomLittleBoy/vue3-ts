@@ -46,13 +46,17 @@ const loginModule: Module<ILoginState, IRootState> = {
   },
   // 做异步操作
   actions: {
-    async accountLoginAction({ commit }, playload: IAccount) {
+    async accountLoginAction({ commit, dispatch }, playload: IAccount) {
       // 1.登录逻辑
       const loginResult = await accountLoginRequest(playload)
-      console.log("loginResult", loginResult)
       const { id, token } = loginResult.data
       commit("changeToken", token)
       localCache.setCache("token", token)
+
+      // 发送初始化的请
+      // 注意: 存在token发送请求  设置token后发送
+      dispatch("getInitialDataAction", null, { root: true })
+
       // 2.请求用户信息
       const userInfoResult = await requestUserInfoById(id)
       const userInfo = userInfoResult.data

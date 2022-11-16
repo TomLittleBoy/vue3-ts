@@ -12,7 +12,7 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item command="a">
+          <el-dropdown-item command="handleExitClick">
             <el-icon><CircleCloseFilled /></el-icon>
             退出登录</el-dropdown-item
           >
@@ -33,12 +33,19 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue"
 import { useStore } from "@/store"
+import localCache from "@/utils/cache"
+import { useRouter } from "vue-router"
 export default defineComponent({
   setup(props) {
     const store = useStore()
+    const route = useRouter()
     const name = computed(() => store.state.login.userInfo.name)
     const handleCommand = (command: string | number) => {
-      alert(command)
+      // alert(command)
+      if (command === "handleExitClick") {
+        localCache.deleteCache("token")
+        route.push("/main")
+      }
     }
 
     return { handleCommand, name }

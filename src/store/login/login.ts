@@ -73,10 +73,12 @@ const loginModule: Module<ILoginState, IRootState> = {
       router.push("/main")
     },
     // 处理vuex刷新问题
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache("token")
       if (token) {
         commit("changeToken", token)
+        // 发送初始化的请求
+        dispatch("getInitialDataAction", null, { root: true })
       }
       const userInfo = localCache.getCache("userInfo")
       if (userInfo) {

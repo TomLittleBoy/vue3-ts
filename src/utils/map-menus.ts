@@ -108,4 +108,21 @@ export function mapMenusToPermissions(userMenus: any[]) {
 
   return permissions
 }
+
+export function menuMapLeafKeys(menuList: any[]) {
+  const leftKeys: number[] = []
+  const _recurseGetLeaf = (menuList: any[]) => {
+    for (const item of menuList) {
+      if (item.children) {
+        _recurseGetLeaf(item.children)
+      } else {
+        leftKeys.push(item.id)
+      }
+    }
+  }
+
+  _recurseGetLeaf(menuList)
+  return leftKeys
+}
+
 export { firstMenu }

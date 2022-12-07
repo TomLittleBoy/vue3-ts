@@ -9,6 +9,7 @@
     >
       <!-- <span>Open the dialog from the center from the screen</span> -->
       <RsForm v-bind="modalConfig" v-model="formData"></RsForm>
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>
@@ -41,6 +42,12 @@ export default defineComponent({
     defaultInfo: {
       type: Object,
       default: () => ({})
+    },
+    otherInfo: {
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   setup(props) {
@@ -60,20 +67,19 @@ export default defineComponent({
 
     const store = useStore()
     const handleConfirmClick = () => {
-      debugger
       dialogVisible.value = false
       if (Object.keys(props.defaultInfo).length) {
         // 编辑
         store.dispatch("system/editPageDataAction", {
           pageName: props.pageName,
-          editData: { ...formData.value },
+          editData: { ...formData.value, ...props.otherInfo },
           id: props.defaultInfo.id
         })
       } else {
         // 新建
         store.dispatch("system/createPageDataAction", {
           pageName: props.pageName,
-          newData: { ...formData.value }
+          newData: { ...formData.value, ...props.otherInfo }
         })
       }
     }

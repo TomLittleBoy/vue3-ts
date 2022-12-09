@@ -2,7 +2,7 @@
   <div class="dashboard">
     <el-row :gutter="10">
       <el-col :span="7">
-        <Card title="分类商品数量(饼图)"></Card>
+        <Card title="分类商品数量(饼图)"> </Card>
       </el-col>
       <el-col :span="10">
         <Card title="不同城市商品销量"></Card>
@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue"
-import * as echarts from "echarts"
+import { defineComponent, ref, computed, onMounted } from "vue"
+import { useStore } from "@/store"
 import Card from "@/base-ui/card"
 export default defineComponent({
   name: "dashboard",
@@ -33,9 +33,17 @@ export default defineComponent({
     Card
   },
   setup() {
-    const divRef = ref<HTMLElement>()
+    const store = useStore()
+    store.dispatch("dashboard/getDashboardDataAction")
 
-    return { divRef }
+    //获取数据
+    const categoryGoodsCount = computed(() => {
+      return store.state.dashboard.categoryGoodsCount.map((item: any) => {
+        return { name: item.name, value: item.goodsCount }
+      })
+    })
+
+    return { categoryGoodsCount }
   }
 })
 </script>

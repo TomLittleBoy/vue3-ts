@@ -2,7 +2,9 @@
   <div class="dashboard">
     <el-row :gutter="10">
       <el-col :span="7">
-        <Card title="分类商品数量(饼图)"> </Card>
+        <Card title="分类商品数量(饼图)">
+          <PieEchart :pieData="categoryGoodsCount"></PieEchart>
+        </Card>
       </el-col>
       <el-col :span="10">
         <Card title="不同城市商品销量"></Card>
@@ -27,10 +29,12 @@
 import { defineComponent, ref, computed, onMounted } from "vue"
 import { useStore } from "@/store"
 import Card from "@/base-ui/card"
+import { PieEchart } from "@/components/page-echarts"
 export default defineComponent({
   name: "dashboard",
   components: {
-    Card
+    Card,
+    PieEchart
   },
   setup() {
     const store = useStore()

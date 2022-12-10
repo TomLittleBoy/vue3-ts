@@ -7,19 +7,27 @@
         </Card>
       </el-col>
       <el-col :span="10">
-        <Card title="不同城市商品销量"></Card>
+        <Card title="不同城市商品销量">
+          <MapEchart :mapData="addressGoodsSale"></MapEchart>
+        </Card>
       </el-col>
       <el-col :span="7">
-        <Card title="分类商品数量(玫瑰图)"></Card>
+        <Card title="分类商品数量(玫瑰图)">
+          <RoseEchart :roseData="categoryGoodsCount"></RoseEchart>
+        </Card>
       </el-col>
     </el-row>
 
     <el-row :gutter="10" class="content-row">
       <el-col :span="12">
-        <Card title="分类商品的销量"></Card>
+        <Card title="分类商品的销量">
+          <LineEchart :lineData="categoryGoodsSale"></LineEchart>
+        </Card>
       </el-col>
       <el-col :span="12">
-        <Card title="分类商品的收藏"></Card>
+        <Card title="分类商品的收藏">
+          <BarEchart :="categoryGoodsFavor"></BarEchart>
+        </Card>
       </el-col>
     </el-row>
   </div>
@@ -29,25 +37,71 @@
 import { defineComponent, ref, computed, onMounted } from "vue"
 import { useStore } from "@/store"
 import Card from "@/base-ui/card"
-import { PieEchart } from "@/components/page-echarts"
+import {
+  PieEchart,
+  MapEchart,
+  RoseEchart,
+  LineEchart,
+  BarEchart
+} from "@/components/page-echarts"
 export default defineComponent({
   name: "dashboard",
   components: {
     Card,
-    PieEchart
+    PieEchart,
+    MapEchart,
+    RoseEchart,
+    LineEchart,
+    BarEchart
   },
   setup() {
     const store = useStore()
     store.dispatch("dashboard/getDashboardDataAction")
 
     //获取数据
+    //饼图
     const categoryGoodsCount = computed(() => {
       return store.state.dashboard.categoryGoodsCount.map((item: any) => {
         return { name: item.name, value: item.goodsCount }
       })
     })
 
-    return { categoryGoodsCount }
+    //地图
+    const addressGoodsSale = computed(() => {
+      return store.state.dashboard.addressGoodsSale.map((item: any) => {
+        return { name: item.address, value: item.count }
+      })
+    })
+    // 折线图数据
+    const categoryGoodsSale = computed(() => {
+      const xLabels: string[] = []
+      const values: any[] = []
+      const categoryGoodsSale = store.state.dashboard.categoryGoodsSale
+      for (const item of categoryGoodsSale) {
+        xLabels.push(item.name)
+        values.push(item.goodsCount)
+      }
+      return { xLabels, values }
+    })
+
+    // 柱状图数据
+    const categoryGoodsFavor = computed(() => {
+      const xLabels: string[] = []
+      const values: any[] = []
+      const categoryGoodsFavor = store.state.dashboard.categoryGoodsFavor
+      for (const item of categoryGoodsFavor) {
+        xLabels.push(item.name)
+        values.push(item.goodsFavor)
+      }
+      return { xLabels, values }
+    })
+
+    return {
+      categoryGoodsCount,
+      addressGoodsSale,
+      categoryGoodsSale,
+      categoryGoodsFavor
+    }
   }
 })
 </script>

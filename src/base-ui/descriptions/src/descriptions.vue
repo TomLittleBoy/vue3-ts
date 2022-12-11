@@ -16,7 +16,7 @@ import { defineProps, withDefaults } from "vue"
 interface Props {
   title?: string
   column: number
-  tableDatas: string[]
+  tableDatas: any[]
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -26,4 +26,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.description {
+  margin-top: 20px;
+}
+</style>

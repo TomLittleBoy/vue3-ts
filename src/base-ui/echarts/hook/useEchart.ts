@@ -1,6 +1,7 @@
 import * as echarts from "echarts"
 
-import chinaMapData from "../data/china.json"
+// import chinaMapData from "../data/china.json"
+const chinaMapData = require("../data/china.json")
 
 echarts.registerMap("china", chinaMapData)
 

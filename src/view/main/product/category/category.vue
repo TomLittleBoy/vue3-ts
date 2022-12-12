@@ -1,18 +1,28 @@
 <template>
   <div class="category">
-    <h2>category</h2>
+    <PageSearch
+      :searchFormConfig="searchFormConfig"
+      @queryBtnClick="handleQueryClick"
+      @resetBtnClick="handleResetClick"
+    />
+
+    <PageContent
+      ref="pageContentRef"
+      :contentTableConfig="contentTableConfig"
+      pageName="category"
+    />
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue"
+<script lang="ts" setup>
+import PageSearch from "@/components/page-search"
+import PageContent from "@/components/page-content"
+import { usePageSearch } from "@/hooks/use-page-search"
 
-export default defineComponent({
-  name: "category",
-  setup() {
-    return {}
-  }
-})
+import { searchFormConfig } from "./config/search.config"
+import { contentTableConfig } from "./config/content.config"
+
+const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
 </script>
 
 <style scoped></style>

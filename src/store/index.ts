@@ -35,6 +35,7 @@ const store = createStore<IRootState>({
       })
       debugger
       const { list: departmentList } = departmentResult.data
+
       //请求角色数据
       const roleResult = await getPageListData("/role/list", {
         offset: 0,

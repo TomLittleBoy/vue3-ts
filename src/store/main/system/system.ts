@@ -22,7 +22,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       menuList: [],
       menuCount: 0,
       categoryList: [],
-      categoryCount: 0
+      categoryCount: 0,
+      departmentList: [],
+      departmentCount: 0
     }
   },
   mutations: {
@@ -57,6 +59,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeCategoryCount(state, count: number) {
       state.categoryCount = count
+    },
+    changeDepartmentList(state, list: any[]) {
+      state.departmentList = list
+    },
+    changeDepartmentCount(state, count: number) {
+      state.departmentCount = count
     }
   },
   getters: {
@@ -79,13 +87,11 @@ const systemModule: Module<ISystemState, IRootState> = {
       //发送请求 根据不同参数
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
       const { list, totalCount } = pageResult.data
-      console.log("list", list)
 
       const changePageName =
         pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
-      console.log("changePageName", changePageName)
 
-      //根据不同页面提交不同mutations
+      //根据不同页面提交不同mutationss
       commit(`change${changePageName}List`, list)
       commit(`change${changePageName}Count`, totalCount)
     },

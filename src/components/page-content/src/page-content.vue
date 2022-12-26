@@ -106,7 +106,8 @@ export default defineComponent({
 
     // 发送请求 获取数据
     const getPageData = (queryInfo: any = {}) => {
-      if (!isQuery) return
+      // 这里后台暂时没有故事列表的权限,所有这里暂时注释 防止列表数据不出来
+      // if (!isQuery) return
       store.dispatch("system/getPageListAction", {
         // pageUrl: "users/list",
         pageName: props.pageName,

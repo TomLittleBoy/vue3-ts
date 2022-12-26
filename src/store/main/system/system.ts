@@ -24,7 +24,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       categoryList: [],
       categoryCount: 0,
       departmentList: [],
-      departmentCount: 0
+      departmentCount: 0,
+      storyList: [],
+      storyCount: 0
     }
   },
   mutations: {
@@ -65,6 +67,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeDepartmentCount(state, count: number) {
       state.departmentCount = count
+    },
+    changeStoryList(state, list: any[]) {
+      state.storyList = list
+    },
+    changeStoryCount(state, count: number) {
+      state.storyCount = count
     }
   },
   getters: {
@@ -82,8 +90,14 @@ const systemModule: Module<ISystemState, IRootState> = {
   actions: {
     async getPageListAction({ commit }, payload: any) {
       // 1.获取pageUrl
+      debugger
       const pageName = payload.pageName
       const pageUrl = `/${pageName}/list`
+      debugger
+      console.log("pageName", pageName)
+
+      console.log("pageUrl", pageUrl)
+
       //发送请求 根据不同参数
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
       const { list, totalCount } = pageResult.data

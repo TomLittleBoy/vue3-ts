@@ -4,6 +4,7 @@ import { getPageListData } from "@/service/main/system/system"
 import dashboard from "./main/analysis/dashboard"
 import login from "./login/login"
 import system from "./main/system/system"
+// import story from "./main/story/story"
 const store = createStore<IRootState>({
   state() {
     return {
@@ -57,6 +58,7 @@ const store = createStore<IRootState>({
     login,
     system,
     dashboard
+    // story
   }
 })
 

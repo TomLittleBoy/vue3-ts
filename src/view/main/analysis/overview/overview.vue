@@ -2,8 +2,7 @@
   <div class="overview">
     <Card title="关于">
       <div class="left">
-        Vue3Admin 是基于 Vue3、Vuex、VueRouter、Vite、 ElementPlus
-        、TypeScript、Echart5 等后台系统解决方案。
+        <TypingAnimation></TypingAnimation>
       </div>
     </Card>
 
@@ -104,13 +103,27 @@ import {
 } from "./config"
 import TextLink from "@/base-ui/text-link"
 import Descriptions from "@/base-ui/descriptions"
+import TypingAnimation from "@/base-ui/typing-animation/src/typing-animation.vue"
 </script>
 
 <style scoped lang="less">
 .overview {
   .left {
     text-align: left;
+    // 打字机动画
+    // animation: typewriter 2s steps(20, end) forwards;
+    // white-space: nowrap;
+    // overflow: hidden;
   }
+
+  // @keyframes typewriter {
+  //   from {
+  //     width: 0;
+  //   }
+  //   to {
+  //     width: 900px;
+  //   }
+  // }
 
   .el-card {
     margin-bottom: 20px;

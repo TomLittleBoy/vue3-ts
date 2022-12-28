@@ -19,4 +19,10 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.typing {
+  font-size: 16px;
+  color: #666;
+  margin-left: 20px;
+}
+</style>

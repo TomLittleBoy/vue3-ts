@@ -2,6 +2,10 @@
   <div class="overview">
     <Card title="关于">
       <div class="left">
+        <div class="greeting">
+          <span>{{ timeInfo.timeFrame }},</span>
+          <span>{{ name }}</span>
+        </div>
         <TypingAnimation></TypingAnimation>
       </div>
     </Card>
@@ -20,7 +24,7 @@
       ></Descriptions>
     </Card>
     <Card title="项目结构">
-      <div class="left">
+      <div class="project_structure">
         <Code language="bash" :code="projectDir"></Code>
       </div>
     </Card>
@@ -92,7 +96,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from "vue"
+import { ref, computed } from "vue"
 import Card from "@/base-ui/card"
 import Code from "@/base-ui/code"
 import {
@@ -104,16 +108,34 @@ import {
 import TextLink from "@/base-ui/text-link"
 import Descriptions from "@/base-ui/descriptions"
 import TypingAnimation from "@/base-ui/typing-animation/src/typing-animation.vue"
+import { getNowTimeFrameByUnix } from "@/utils/date-format"
+import { useStore } from "@/store"
+
+const store = useStore()
+const name = computed(() => store.state.login.userInfo.name)
+const timeInfo = ref(getNowTimeFrameByUnix())
 </script>
 
 <style scoped lang="less">
 .overview {
+  .project_structure {
+    text-align: left;
+  }
   .left {
     text-align: left;
+    display: flex;
+    line-height: 30px;
+
     // 打字机动画
     // animation: typewriter 2s steps(20, end) forwards;
     // white-space: nowrap;
     // overflow: hidden;
+
+    .greeting {
+      font-size: 20px;
+      font-weight: 700;
+      margin-right: 10px;
+    }
   }
 
   // @keyframes typewriter {

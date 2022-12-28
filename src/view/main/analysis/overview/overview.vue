@@ -9,6 +9,17 @@
         <TypingAnimation></TypingAnimation>
       </div>
     </Card>
+    <Card title="其他">
+      <div class="left">
+        <el-link
+          type="primary"
+          href="http://120.46.223.203/"
+          target="_blank"
+          :underline="false"
+          >新能源充电桩可视化平台</el-link
+        >
+      </div>
+    </Card>
 
     <Card title="技术栈">
       <TextLink :text-arrs="technologyStacks"></TextLink>

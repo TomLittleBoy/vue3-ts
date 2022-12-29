@@ -14,7 +14,10 @@ export function usePageModal(newCb?: CallbackFn, edutCb?: CallbackFn) {
     newCb && newCb()
   }
   const handleEditData = (item: any) => {
+    debugger
     defaultInfo.value = { ...item }
+    console.log(defaultInfo.value)
+
     if (pageModalRef.value) {
       pageModalRef.value.dialogVisible = true
     }

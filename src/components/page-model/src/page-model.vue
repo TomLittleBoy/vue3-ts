@@ -2,9 +2,9 @@
   <div class="page-modal">
     <el-dialog
       v-model="dialogVisible"
-      title="新建用户"
       width="30%"
       align-center
+      :title="title"
       destroy-on-close
     >
       <!-- <span>Open the dialog from the center from the screen</span> -->
@@ -48,6 +48,10 @@ export default defineComponent({
       default: () => {
         return {}
       }
+    },
+    title: {
+      type: String,
+      default: "新建"
     }
   },
   setup(props) {

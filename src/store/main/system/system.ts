@@ -133,6 +133,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     //创建用户
     async createPageDataAction({ dispatch }, payload: any) {
       // 创建数据的请求
+      debugger
       const { pageName, newData } = payload
       const pageUrl = `/${pageName}`
       await createPageData(pageUrl, newData)

@@ -6,6 +6,7 @@
       pageName="role"
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
+      title="新建角色"
     ></page-content>
     <page-modal
       ref="pageModalRef"

@@ -10,11 +10,13 @@
       :contentTableConfig="contentTableConfig"
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
+      title="新建用户"
     ></page-content>
     <PageModal
       :modalConfig="modalConfigRef"
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
+      title="新建用户"
       pageName="users"
     ></PageModal>
   </div>

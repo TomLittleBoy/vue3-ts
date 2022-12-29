@@ -14,7 +14,7 @@
             type="primary"
             size="medium"
             @click="handleNewClick"
-            >新建用户</el-button
+            >{{ title }}</el-button
           >
         </template>
         <!-- 列中插槽 -->
@@ -86,7 +86,8 @@ export default defineComponent({
       type: Object,
       require: true
     },
-    pageName: { type: String, required: true }
+    pageName: { type: String, required: true },
+    title: { type: String, default: "新建" }
   },
   emits: ["newBtnClick", "editBtnClick"],
   setup(props, { emit }) {

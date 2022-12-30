@@ -7,6 +7,7 @@ declare global {
   const ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
   const ElButton: typeof import('element-plus/es')['ElButton']
   const ElCard: typeof import('element-plus/es')['ElCard']
+  const ElCascader: typeof import('element-plus/es')['ElCascader']
   const ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
   const ElCol: typeof import('element-plus/es')['ElCol']
   const ElConfigProvider: typeof import('element-plus/es')['ElConfigProvider']

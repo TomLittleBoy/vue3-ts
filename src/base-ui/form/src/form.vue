@@ -36,8 +36,9 @@
                     size="large"
                     v-for="option in item.options"
                     :key="option.value"
+                    :label="option.label"
                     :value="option.value"
-                    >{{ option.title }}</el-option
+                    >{{ option.label }}</el-option
                   >
                 </el-select>
               </template>
@@ -48,6 +49,14 @@
                   v-bind="item.otherOptions"
                   v-model="formData[`${item.field}`]"
                 ></el-date-picker>
+              </template>
+              <template v-else-if="item.type === 'cascader'">
+                <el-cascader
+                  :options="item.options"
+                  :props="props1"
+                  clearable
+                  @change="changeCascader"
+                />
               </template>
             </el-form-item>
           </el-col>
@@ -98,8 +107,20 @@ export default defineComponent({
       })
     }
   },
+
   emits: ["update:modelValue"],
   setup(props, { emit }) {
+    const props1 = {
+      checkStrictly: true,
+      label: "name",
+      value: "parentId"
+    }
+    console.log("formItems", props.formItems)
+
+    const changeCascader = (value: any) => {
+      console.log("value", value)
+    }
+
     const formData = ref({ ...props.modelValue })
     watch(
       formData,
@@ -108,7 +129,7 @@ export default defineComponent({
       },
       { deep: true }
     )
-    return { formData }
+    return { formData, props1, changeCascader }
   }
 })
 </script>

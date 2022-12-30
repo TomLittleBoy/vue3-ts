@@ -44,7 +44,7 @@ export default defineComponent({
   },
   setup() {
     const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
-    let dialogVisible = ref(false)
+    // let dialogVisible = ref(false)
 
     // const handleNewData = () => {
     //   dialogVisible.value = true
@@ -74,13 +74,13 @@ export default defineComponent({
         (item) => item.field === "departmentId"
       )
       departmentItem!.options = store.state.entireDepartment.map((item) => {
-        return { title: item.name, value: item.id }
+        return { label: item.name, value: item.id }
       })
       const roleItem = modalConfig.formItems.find(
         (item) => item.field === "roleId"
       )
       roleItem!.options = store.state.entireRole.map((item) => {
-        return { title: item.name, value: item.id }
+        return { label: item.name, value: item.id }
       })
       return modalConfig
     })
@@ -94,7 +94,7 @@ export default defineComponent({
       pageContentRef,
       handleResetClick,
       handleQueryClick,
-      dialogVisible,
+
       modalConfig,
       handleNewData,
       handleEditData,

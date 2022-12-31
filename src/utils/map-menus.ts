@@ -125,27 +125,4 @@ export function menuMapLeafKeys(menuList: any[]) {
   return leftKeys
 }
 
-export function menuListOptions(menuOption: any[]) {
-  const opt: any[] = []
-
-  const _resourceOpt = (menuOption: any[]) => {
-    for (const item of menuOption) {
-      if (item.children && item.children !== null) {
-        const it = { id: "", name: "" }
-        it.id = item.id
-        it.name = item.name
-        opt.push(it)
-        _resourceOpt(item.children)
-      } else {
-        const it = { id: "", name: "" }
-        it.id = item.id
-        it.name = item.name
-        opt.push(it)
-      }
-    }
-  }
-  _resourceOpt(menuOption)
-  return opt
-}
-
 export { firstMenu }

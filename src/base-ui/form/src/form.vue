@@ -52,10 +52,12 @@
               </template>
               <template v-else-if="item.type === 'cascader'">
                 <el-cascader
+                  size="large"
+                  style="width: 100%"
                   :options="item.options"
                   :props="props1"
                   clearable
-                  @change="changeCascader"
+                  v-model="formData[`${item.field}`]"
                 />
               </template>
             </el-form-item>
@@ -71,7 +73,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue"
+import { defineComponent, PropType, ref, watch, computed } from "vue"
 import { IFormItem } from "../types"
 
 export default defineComponent({
@@ -113,13 +115,10 @@ export default defineComponent({
     const props1 = {
       checkStrictly: true,
       label: "name",
-      value: "parentId"
+      value: "id",
+      children: "children"
     }
     console.log("formItems", props.formItems)
-
-    const changeCascader = (value: any) => {
-      console.log("value", value)
-    }
 
     const formData = ref({ ...props.modelValue })
     watch(
@@ -129,7 +128,7 @@ export default defineComponent({
       },
       { deep: true }
     )
-    return { formData, props1, changeCascader }
+    return { formData, props1 }
   }
 })
 </script>

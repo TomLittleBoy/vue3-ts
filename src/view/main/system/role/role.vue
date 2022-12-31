@@ -1,11 +1,15 @@
 <template>
   <div class="role">
-    <page-search :searchFormConfig="searchFormConfig"></page-search>
+    <page-search
+      :searchFormConfig="searchFormConfig"
+      @queryBtnClick="handleQueryClick"
+    ></page-search>
     <page-content
       :contentTableConfig="contentTableConfig"
       pageName="role"
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
+      ref="pageContentRef"
       title="新建角色"
     ></page-content>
     <page-modal
@@ -43,6 +47,7 @@ import { searchFormConfig } from "./config/search.config"
 import { contentTableConfig } from "./config/content.config"
 import { modalConfig } from "./config/modal.config"
 import { usePageModal } from "@/hooks/use-page-modal"
+import { usePageSearch } from "@/hooks/use-page-search"
 import { ElTree } from "element-plus"
 export default defineComponent({
   components: { PageContent, PageSearch, PageModal },
@@ -55,6 +60,8 @@ export default defineComponent({
         elTreeRef.value?.setCheckedKeys(leafKeys, false)
       })
     }
+
+    const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
 
     const [pageModalRef, defaultInfo, handleNewData, handleEditData] =
       usePageModal(undefined, editCallback)
@@ -85,7 +92,10 @@ export default defineComponent({
       menus,
       handleCheckChange,
       otherInfo,
-      elTreeRef
+      elTreeRef,
+      handleQueryClick,
+      pageContentRef,
+      handleResetClick
     }
   }
 })

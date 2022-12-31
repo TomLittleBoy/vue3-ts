@@ -93,7 +93,7 @@ const systemModule: Module<ISystemState, IRootState> = {
       debugger
       const pageName = payload.pageName
       const pageUrl = `/${pageName}/list`
-      debugger
+
       console.log("pageName", pageName)
 
       console.log("pageUrl", pageUrl)
@@ -149,6 +149,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     // 编辑用户
     async editPageDataAction({ dispatch }, payload: any) {
+      debugger
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
       await editPageData(pageUrl, editData)

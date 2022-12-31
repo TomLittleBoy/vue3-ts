@@ -26,6 +26,7 @@
 import { useStore } from "vuex"
 import { defineComponent, ref, watch } from "vue"
 import RsForm from "@/base-ui/form"
+
 export default defineComponent({
   components: {
     RsForm
@@ -63,17 +64,22 @@ export default defineComponent({
     watch(
       () => props.defaultInfo,
       (newValue) => {
+        debugger
         for (const item of props.modalConfig.formItems) {
           formData.value[`${item.field}`] = newValue[`${item.field}`]
         }
       }
     )
-
+    // const changeCascader = (value: any) => {
+    //   formData.value[`parentId`] = value[0]
+    // }
     const store = useStore()
     const handleConfirmClick = () => {
       dialogVisible.value = false
       if (Object.keys(props.defaultInfo).length) {
         // 编辑
+        console.log("编辑formData.vlaue", formData.value)
+
         store.dispatch("system/editPageDataAction", {
           pageName: props.pageName,
           editData: { ...formData.value, ...props.otherInfo },
@@ -87,6 +93,7 @@ export default defineComponent({
         })
       }
     }
+
     return { dialogVisible, handleConfirmClick, formData }
   }
 })

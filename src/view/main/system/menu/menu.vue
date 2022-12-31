@@ -25,7 +25,6 @@ import PageModal from "@/components/page-model"
 import { usePageModal } from "@/hooks/use-page-modal"
 import { modalConfig } from "./config/modal.config"
 import { useStore } from "@/store"
-import { menuListOptions } from "@/utils/map-menus"
 
 export default defineComponent({
   name: "menu",
@@ -42,21 +41,12 @@ export default defineComponent({
       const menuItem = modalConfig.formItems.find((item) => {
         return item.field === "parentId"
       })
+      // const data = menuListOptions(store.state.entireMenu)
 
-      const data = menuListOptions(store.state.entireMenu)
-      console.log("menuItem", menuItem)
-
-      // menuItem!.options = store.state.entireMenu.map((item) => {
-      //   debugger
-      //   return { label: item.name, value: item.id }
+      // menuItem!.options = data.map((item) => {
+      //   return { name: item.name, parentId: item.id }
       // })
-      menuItem!.options = data.map((item) => {
-        return { name: item.name, parentId: item.id }
-      })
-
-      console.log("data", data)
-      console.log("options", menuItem!.options)
-
+      menuItem!.options = store.state.entireMenu
       return modalConfig
     })
 

@@ -7,9 +7,11 @@
       :title="title"
       destroy-on-close
     >
-      <!-- <span>Open the dialog from the center from the screen</span> -->
-      <RsForm v-bind="modalConfig" v-model="formData"></RsForm>
-      <slot></slot>
+      <el-scrollbar max-height="400px">
+        <!-- <span>Open the dialog from the center from the screen</span> -->
+        <RsForm v-bind="modalConfig" v-model="formData"></RsForm>
+        <slot></slot>
+      </el-scrollbar>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisible = false">取消</el-button>

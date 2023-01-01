@@ -19,7 +19,7 @@
       :modalConfig="modalConfig"
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
-      title="新建类别"
+      :title="`${defaultInfo.Title}类别`"
       pageName="category"
     ></PageModal>
   </div>
@@ -37,6 +37,8 @@ import { usePageModal } from "@/hooks/use-page-modal"
 const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
 const [pageModalRef, defaultInfo, handleNewData, handleEditData] =
   usePageModal()
+
+console.log("Title", defaultInfo)
 </script>
 
 <style scoped></style>

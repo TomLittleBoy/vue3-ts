@@ -6,7 +6,7 @@ export function usePageModal(newCb?: CallbackFn, edutCb?: CallbackFn) {
   const pageModalRef = ref<InstanceType<typeof PageModal>>()
   const defaultInfo = ref({})
   const handleNewData = () => {
-    defaultInfo.value = {}
+    defaultInfo.value = { Title: "新建" }
     if (pageModalRef.value) {
       debugger
       pageModalRef.value.dialogVisible = true
@@ -15,7 +15,7 @@ export function usePageModal(newCb?: CallbackFn, edutCb?: CallbackFn) {
   }
   const handleEditData = (item: any) => {
     debugger
-    defaultInfo.value = { ...item }
+    defaultInfo.value = { Title: "编辑", ...item }
     console.log(defaultInfo.value)
 
     if (pageModalRef.value) {

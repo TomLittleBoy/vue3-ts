@@ -8,7 +8,7 @@
       @editBtnClick="handleEditData"
     ></page-content>
     <page-modal
-      title="新建菜单"
+      :title="`${defaultInfo.Title}菜单`"
       :modalConfig="modalConfigRef"
       ref="pageModalRef"
       pageName="menu"

@@ -18,7 +18,7 @@
       ref="pageModalRef"
       :defaultInfo="defaultInfo"
       pageName="department"
-      title="新建部门"
+      :title="`${defaultInfo.Title}部门`"
     ></PageModal>
   </div>
 </template>

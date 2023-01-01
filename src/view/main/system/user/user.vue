@@ -16,7 +16,7 @@
       :modalConfig="modalConfigRef"
       :defaultInfo="defaultInfo"
       ref="pageModalRef"
-      title="新建用户"
+      :title="`${defaultInfo.Title}用户`"
       pageName="users"
     ></PageModal>
   </div>

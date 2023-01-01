@@ -18,6 +18,7 @@
       :otherInfo="otherInfo"
       :defaultInfo="defaultInfo"
       :modalConfig="modalConfig"
+      :title="`${defaultInfo.Title}角色`"
     >
       <div class="menu-tree">
         <el-tree

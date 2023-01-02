@@ -10,10 +10,10 @@ export const searchFormConfig: IForm = {
   },
   formItems: [
     {
-      field: "id",
+      field: "cellphone",
       type: "input",
-      label: "id",
-      placeholder: "请输入id"
+      label: "手机号码",
+      placeholder: "请输入手机号码"
     },
     {
       field: "name",
@@ -23,23 +23,13 @@ export const searchFormConfig: IForm = {
       placeholder: "请输入用户名"
     },
     {
-      field: "password",
-      label: "密码",
+      field: "realname",
+      label: "真实姓名",
       type: "password",
       rules: [],
-      placeholder: "请输入密码"
+      placeholder: "请输入真实姓名"
     },
-    {
-      field: "sport",
-      label: "喜欢的运动",
-      type: "select",
-      rules: [],
-      placeholder: "请输入喜欢的运动",
-      options: [
-        { title: "篮球", value: "basketball" },
-        { title: "足球", value: "football" }
-      ]
-    },
+
     {
       field: "enable",
       type: "select",
@@ -51,7 +41,7 @@ export const searchFormConfig: IForm = {
       ]
     },
     {
-      field: "createTime",
+      field: "createAt",
       type: "datepicker",
       label: "创建时间",
       rules: [],

@@ -2,14 +2,14 @@
   <div class="main">
     <el-container class="main-content">
       <el-aside :width="isCollapse ? '60px' : '210px'">
-        <nav-menu :collapse="isCollapse"></nav-menu>
+        <nav-menu :collapse="isCollapse" />
       </el-aside>
       <el-container class="page">
         <el-header class="page-header">
-          <nav-header @foldChange="handleFoldChange"></nav-header>
+          <nav-header @foldChange="foldChange" />
         </el-header>
         <el-main class="page-content">
-          <div class="page-info">
+          <div class="content">
             <router-view></router-view>
           </div>
         </el-main>
@@ -20,20 +20,25 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue"
-import NavHeader from "@/components/nav-header"
 import NavMenu from "@/components/nav-menu"
+import NavHeader from "@/components/nav-header"
+
 export default defineComponent({
-  name: "main",
   components: {
-    NavHeader,
-    NavMenu
+    NavMenu,
+    NavHeader
   },
   setup() {
+    // 1.保存是否当前处于折叠状态
     const isCollapse = ref(false)
-    const handleFoldChange = (isFold: boolean) => {
+    const foldChange = (isFold: boolean) => {
       isCollapse.value = isFold
     }
-    return { isCollapse, handleFoldChange }
+
+    return {
+      isCollapse,
+      foldChange
+    }
   }
 })
 </script>
@@ -54,10 +59,11 @@ export default defineComponent({
 
 .page-content {
   height: calc(100% - 48px);
-}
-.page-info {
-  background-color: #fff;
-  border-radius: 5px;
+
+  .content {
+    background-color: #fff;
+    border-radius: 8px;
+  }
 }
 
 .el-header,
@@ -92,6 +98,5 @@ export default defineComponent({
   color: #333;
   text-align: center;
   background-color: #f0f2f5;
-  // height: 0;
 }
 </style>

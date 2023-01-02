@@ -3,7 +3,7 @@
     <!-- 以文件配置的形式注入 -->
     <rs-form :="searchFormConfig" v-model="formData">
       <template #header>
-        <h1 class="header">高级检索</h1>
+        <!-- <h1 class="header">高级检索</h1> -->
       </template>
       <template #footer>
         <div class="handle-btns">

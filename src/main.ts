@@ -5,7 +5,7 @@ import store from "./store"
 import { globalRegister } from "./global"
 // 初始化页面布局
 import "normalize.css"
-import "./assets/css/index.less"
+import "./assets/css/index.css"
 // import tRequest from "./service"
 import { setupStore } from "./store"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"

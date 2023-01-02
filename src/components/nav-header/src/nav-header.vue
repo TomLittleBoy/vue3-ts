@@ -55,7 +55,9 @@ export default defineComponent({
 <style scoped lang="less">
 .nav-header {
   display: flex;
-  width: 100%;
+  // width: 100%;
+  align-items: center;
+  flex: 1;
   .fold-menu {
     font-size: 30px;
     cursor: pointer;

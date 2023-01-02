@@ -1,5 +1,5 @@
 import { ElLoading } from "element-plus"
-import { LoadingInstance } from "element-plus/lib/components/loading/src/loading"
+// import { LoadingInstance } from "element-plus/lib/components/loading/src/loading"
 
 import axios from "axios"
 import type { AxiosInstance } from "axios"
@@ -10,7 +10,7 @@ class TRequest {
   instance: AxiosInstance
   interceptors?: TRequestInterceptors
   showLoading: boolean
-  loading?: LoadingInstance
+  // loading?: LoadingInstance
 
   constructor(config: TRequestConfig) {
     // 创建axios实例
@@ -36,13 +36,13 @@ class TRequest {
       (config) => {
         console.log("所有的实例都有的拦截器: 请求成功拦截")
 
-        if (this.showLoading) {
-          this.loading = ElLoading.service({
-            lock: true,
-            text: "正在请求数据....",
-            background: "rgba(0, 0, 0, 0.5)"
-          })
-        }
+        // if (this.showLoading) {
+        //   this.loading = ElLoading.service({
+        //     lock: true,
+        //     text: "正在请求数据....",
+        //     background: "rgba(0, 0, 0, 0.5)"
+        //   })
+        // }
         return config
       },
       (err) => {
@@ -53,7 +53,7 @@ class TRequest {
     this.instance.interceptors.response.use(
       (res) => {
         // 将loading移除
-        this.loading?.close()
+        // this.loading?.close()
 
         const data = res.data
         console.log("拦截器", data)
@@ -67,7 +67,7 @@ class TRequest {
       (err) => {
         console.log("所有的实例都有的拦截器: 响应失败拦截")
         // 将loading移除
-        this.loading?.close()
+        // this.loading?.close()
 
         // 例子: 判断不同的HttpErrorCode显示不同的错误信息
         if (err.response.status === 404) {

@@ -1,16 +1,17 @@
-import { ElLoading } from "element-plus"
-// import { LoadingInstance } from "element-plus/lib/components/loading/src/loading"
-
 import axios from "axios"
 import type { AxiosInstance } from "axios"
 import type { TRequestInterceptors, TRequestConfig } from "./type"
 
+import { ElLoading } from "element-plus"
+import { LoadingInstance } from "element-plus/lib/components/loading/src/loading.js"
+
 const DEAFULT_LOADING = true
+
 class TRequest {
   instance: AxiosInstance
   interceptors?: TRequestInterceptors
   showLoading: boolean
-  // loading?: LoadingInstance
+  loading?: LoadingInstance
 
   constructor(config: TRequestConfig) {
     // 创建axios实例
@@ -34,15 +35,13 @@ class TRequest {
     // 2.添加所有的实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log("所有的实例都有的拦截器: 请求成功拦截")
-
-        // if (this.showLoading) {
-        //   this.loading = ElLoading.service({
-        //     lock: true,
-        //     text: "正在请求数据....",
-        //     background: "rgba(0, 0, 0, 0.5)"
-        //   })
-        // }
+        if (this.showLoading) {
+          this.loading = ElLoading.service({
+            lock: true,
+            text: "正在请求数据....",
+            background: "rgba(0, 0, 0, 0.5)"
+          })
+        }
         return config
       },
       (err) => {
@@ -53,11 +52,9 @@ class TRequest {
     this.instance.interceptors.response.use(
       (res) => {
         // 将loading移除
-        // this.loading?.close()
+        this.loading?.close()
 
         const data = res.data
-        console.log("拦截器", data)
-
         if (data.returnCode === "-1001") {
           console.log("请求失败~, 错误信息")
         } else {
@@ -65,9 +62,8 @@ class TRequest {
         }
       },
       (err) => {
-        console.log("所有的实例都有的拦截器: 响应失败拦截")
         // 将loading移除
-        // this.loading?.close()
+        this.loading?.close()
 
         // 例子: 判断不同的HttpErrorCode显示不同的错误信息
         if (err.response.status === 404) {
@@ -78,7 +74,7 @@ class TRequest {
     )
   }
 
-  request<T>(config: TRequestConfig<T>): Promise<T> {
+  request<T = any>(config: TRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 1.单个请求对请求config的处理
       if (config.interceptors?.requestInterceptor) {
@@ -112,19 +108,19 @@ class TRequest {
     })
   }
 
-  get<T>(config: TRequestConfig<T>): Promise<T> {
+  get<T = any>(config: TRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "GET" })
   }
 
-  post<T>(config: TRequestConfig<T>): Promise<T> {
+  post<T = any>(config: TRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "POST" })
   }
 
-  delete<T>(config: TRequestConfig<T>): Promise<T> {
+  delete<T = any>(config: TRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "DELETE" })
   }
 
-  patch<T>(config: TRequestConfig<T>): Promise<T> {
+  patch<T = any>(config: TRequestConfig<T>): Promise<T> {
     return this.request<T>({ ...config, method: "PATCH" })
   }
 }

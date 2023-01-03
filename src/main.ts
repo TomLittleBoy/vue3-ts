@@ -9,7 +9,8 @@ import "./assets/css/index.css"
 // import tRequest from "./service"
 import { setupStore } from "./store"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"
-
+import "element-plus/theme-chalk/el-loading.css"
+// import "element-plus/theme-chalk/el-message.css"
 import App from "./App.vue"
 
 const app = createApp(App)

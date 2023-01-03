@@ -4,8 +4,9 @@
       <span class="el-dropdown-link">
         <div class="block">
           <el-avatar
-            :size="25"
-            src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
+            size="medium"
+            class="avatar"
+            src="https://i.ibb.co/Lrbw8Ww/image.png"
           />
         </div>
         <div style="margin-left: 5px">{{ name }}</div>
@@ -27,6 +28,14 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+    <div>
+      <el-badge is-dot class="item">
+        <el-icon><Postcard /></el-icon>
+      </el-badge>
+      <el-badge :value="12" :max="10" class="item badge">
+        <el-icon><Postcard /></el-icon>
+      </el-badge>
+    </div>
   </div>
 </template>
 
@@ -35,7 +44,11 @@ import { defineComponent, computed } from "vue"
 import { useStore } from "@/store"
 import localCache from "@/utils/cache"
 import { useRouter } from "vue-router"
+import { Postcard } from "@element-plus/icons-vue"
 export default defineComponent({
+  component: {
+    Postcard
+  },
   setup(props) {
     const store = useStore()
     const route = useRouter()
@@ -48,7 +61,7 @@ export default defineComponent({
       }
     }
 
-    return { handleCommand, name }
+    return { handleCommand, name, Postcard }
   }
 })
 </script>
@@ -57,5 +70,34 @@ export default defineComponent({
 .el-dropdown-link {
   display: flex;
   align-items: center;
+}
+.user-info {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .item {
+    margin: 0 auto;
+    width: 30px;
+    height: 25px;
+    line-height: 35px;
+
+    margin-right: 25px;
+    &:hover {
+      background: #f2f2f2;
+    }
+
+    // ::v-deep .el-badge__content.is-fixed
+    ::v-deep .badge .el-badge__content.is-fixed {
+      width: 10px;
+      height: 16px;
+    }
+  }
+  .el-icon {
+    font-size: 25px;
+  }
+}
+.avatar {
+  width: 30px;
+  height: 30px;
 }
 </style>

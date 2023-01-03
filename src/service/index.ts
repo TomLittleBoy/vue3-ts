@@ -1,5 +1,4 @@
 // service统一出口
-
 import TRequest from "./request"
 import localCache from "@/utils/cache"
 import { BASE_URL, TIME_OUT } from "./request/config"

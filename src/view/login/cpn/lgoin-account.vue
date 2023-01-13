@@ -20,7 +20,7 @@
 import { defineComponent, ref, reactive } from "vue"
 import type { FormInstance, FormRules } from "element-plus"
 import localCache from "@/utils/cache"
-import { useStore } from "vuex"
+import { useStore, mapActions } from "vuex"
 export default defineComponent({
   setup() {
     const ruleFormRef = ref<FormInstance>()
@@ -52,7 +52,7 @@ export default defineComponent({
         }
       ]
     })
-
+    let accountLoginAction: any = ref("")
     const loginAction = (isKeepPassword: boolean) => {
       // 校验
       ruleFormRef.value?.validate((valid) => {
@@ -73,7 +73,12 @@ export default defineComponent({
       })
     }
 
-    return { account, rules, ruleFormRef, loginAction }
+    return {
+      account,
+      rules,
+      ruleFormRef,
+      loginAction
+    }
   }
 })
 </script>

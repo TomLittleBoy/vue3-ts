@@ -9,7 +9,7 @@ export function useMapper(mapper: any, mapFn: any) {
   const storeStateFns = mapFn(mapper)
 
   // 对数据进行转换
-  const storeState = {}
+  const storeState: any = {}
 
   Object.keys(storeStateFns).forEach((fnKey) => {
     const fn = storeStateFns[fnKey].bind({

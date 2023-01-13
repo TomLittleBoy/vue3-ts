@@ -45,6 +45,7 @@
 import { defineComponent, ref, computed, onMounted } from "vue"
 import { useStore } from "@/store"
 import Card from "@/base-ui/card"
+
 import statisticalPanel from "@/components/statistical-panel"
 import {
   PieEchart,
@@ -53,6 +54,7 @@ import {
   LineEchart,
   BarEchart
 } from "@/components/page-echarts"
+
 export default defineComponent({
   name: "dashboard",
   components: {
@@ -67,6 +69,10 @@ export default defineComponent({
   setup() {
     const store = useStore()
     store.dispatch("dashboard/getDashboardDataAction")
+
+    // const dashboardDataAction = mapActions("dashboard", [
+    //   "getDashboardDataAction"
+    // ])
 
     // 顶部数据
     const topPanelData = computed(() => store.state.dashboard.topPanelDatas)
@@ -116,6 +122,7 @@ export default defineComponent({
       categoryGoodsSale,
       categoryGoodsFavor,
       topPanelData
+      // ...dashboardDataAction
     }
   }
 })

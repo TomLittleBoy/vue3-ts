@@ -40,6 +40,7 @@ const dashboardModule: Module<IDashboardState, IRootState> = {
   },
   actions: {
     async getDashboardDataAction({ commit }) {
+      debugger
       const resultTopPanelDatas = await getAmountList()
       commit("changeTopPanelDatas", resultTopPanelDatas)
 

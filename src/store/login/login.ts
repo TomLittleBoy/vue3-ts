@@ -10,6 +10,7 @@ import { IAccount } from "@/service/login/types"
 import localCache from "@/utils/cache"
 import router from "@/router"
 import { IRootState } from "../types"
+
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
   state() {
@@ -50,7 +51,8 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 1.登录逻辑
       const loginResult = await accountLoginRequest(playload)
       const { id, token } = loginResult.data
-      commit("changeToken", token)
+      // commit("changeToken", token)
+
       localCache.setCache("token", token)
 
       // 发送初始化的请

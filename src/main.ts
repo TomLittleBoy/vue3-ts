@@ -10,9 +10,10 @@ import "./assets/css/index.css"
 import { setupStore } from "./store"
 import * as ElementPlusIconsVue from "@element-plus/icons-vue"
 import "element-plus/theme-chalk/el-loading.css"
-// import "element-plus/theme-chalk/el-message.css"
 import App from "./App.vue"
 import Particles from "particles.vue3"
+//testmock
+import { testmock } from "@/plugin/testMock"
 
 const app = createApp(App)
 //全局引入icon图标
@@ -25,6 +26,7 @@ app.use(router)
 app.use(globalRegister)
 app.use(store)
 app.use(Particles)
+app.use(testmock)
 
 app.mount("#app")
 

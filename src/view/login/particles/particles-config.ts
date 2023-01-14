@@ -1,4 +1,5 @@
 // 背景动画设置
+//参数手册 https://www.cnblogs.com/zx-admin/p/7030978.html
 export const particles = {
   fpsLimit: 60,
   interactivity: {
